@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reportes de Clientes – Auto Repair</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f7f7;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .stat {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+      background: #005a87;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Reportes de Clientes</h1>
+
+<div class="section">
+  <h2>Resumen</h2>
+  <div class="stat" id="totalClientes">Total de clientes: ...</div>
+  <div class="stat" id="clientesRecientes">Clientes nuevos este mes: ...</div>
+  <div class="stat" id="clienteConMasVehiculos">Cliente con más vehículos: ...</div>
+</div>
+
+<div class="section">
+  <h2>Top Clientes</h2>
+  <ul id="topClientes"></ul>
+</div>
+
+<footer>
+  &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<script>
+  const token = localStorage.getItem("token");
+  const tallerId = localStorage.getItem("tallerId");
+
+  if (!token || !tallerId) {
+    alert("No estás autenticado o no hay taller. Serás redirigido.");
+    window.location.href = "login.html";
+  }
+
+  async function cargarEstadisticasClientes() {
+    try {
+      const headers = { Authorization: `Bearer ${token}` };
+
+      // Total de clientes
+      const totalRes = await fetch(`http://localhost:8080/api/clientes/contar/taller/${tallerId}`, { headers });
+      const total = await totalRes.json();
+      document.getElementById("totalClientes").innerText = `Total de clientes: ${total}`;
+
+      // Clientes nuevos del mes
+      const nuevosRes = await fetch(`http://localhost:8080/api/clientes/nuevos-del-mes/${tallerId}`, { headers });
+      const nuevos = await nuevosRes.json();
+      document.getElementById("clientesRecientes").innerText = `Clientes nuevos este mes: ${nuevos}`;
+
+      // Top clientes por vehículos
+      const topRes = await fetch(`http://localhost:8080/api/clientes/top-vehiculos/${tallerId}`, { headers });
+      const topClientes = await topRes.json();
+
+      // Cliente con más vehículos
+      if (topClientes.length > 0) {
+        document.getElementById("clienteConMasVehiculos").innerText = `Cliente con más vehículos: ${topClientes[0].nombreCompleto} (${topClientes[0].cantidadVehiculos})`;
+      }
+
+      // Lista top 5
+      const lista = document.getElementById("topClientes");
+      lista.innerHTML = "";
+      topClientes.slice(0, 5).forEach(cliente => {
+        const li = document.createElement("li");
+        li.textContent = `${cliente.nombreCompleto} – ${cliente.cantidadVehiculos} vehículos`;
+        lista.appendChild(li);
+      });
+
+    } catch (error) {
+      console.error("Error cargando estadísticas", error);
+      alert("❌ Error al obtener los datos del servidor.");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", cargarEstadisticasClientes);
+
+
+</script>
+
+</body>
+</html>

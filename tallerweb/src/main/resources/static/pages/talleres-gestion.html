@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Talleres – Auto Repair</title>
+
+    <!-- Mismo CSS que usuarios para homogeneidad -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="talleres.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* Estilos para formulario y tabla igual que usuarios */
+        button#btnListarTalleres {
+          background-color: #4a6cf7;
+          border: none;
+          color: white;
+          padding: 0.7rem 1.3rem;
+          border-radius: 6px;
+          font-weight: 600;
+          cursor: pointer;
+          margin-left: 10px;
+          transition: background-color 0.3s ease;
+        }
+        button#btnListarTalleres:hover {
+          background-color: #3953c9;
+        }
+        #mensaje {
+          margin-top: 10px;
+          font-weight: 600;
+        }
+        form.login-form {
+          display: none;
+          margin-top: 1em;
+          background: white;
+          padding: 1.5rem;
+          border-radius: 12px;
+          box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+          max-width: 600px;
+        }
+        .input-group {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+          gap: 10px;
+        }
+        .input-group i {
+          color: #4a6cf7;
+          min-width: 25px;
+          text-align: center;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+          flex: 1;
+          padding: 0.5rem 0.75rem;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          font-size: 1rem;
+          outline-offset: 2px;
+          outline-color: #4a6cf7;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+          border-color: #4a6cf7;
+          box-shadow: 0 0 5px #4a6cf7;
+        }
+        button[type="submit"],
+        button#btnCancelar {
+          background-color: #4a6cf7;
+          border: none;
+          color: white;
+          padding: 0.7rem 1.3rem;
+          border-radius: 6px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          margin-top: 0.5rem;
+        }
+        button#btnCancelar {
+          background-color: #ccc;
+          color: #333;
+          margin-left: 10px;
+        }
+        button[type="submit"]:hover {
+          background-color: #3953c9;
+        }
+        button#btnCancelar:hover {
+          background-color: #999;
+        }
+        table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0 8px;
+          margin-top: 2em;
+        }
+        thead tr {
+          background-color: #4a6cf7;
+          color: white;
+          text-align: left;
+          font-weight: 700;
+        }
+        thead th {
+          padding: 12px 15px;
+        }
+        tbody tr {
+          background: white;
+          box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+          transition: background-color 0.2s ease;
+        }
+        tbody tr:hover {
+          background-color: #e3e8ff;
+        }
+        tbody td {
+          padding: 12px 15px;
+          vertical-align: middle;
+        }
+        .editar-btn,
+        .eliminar-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1.1rem;
+        }
+        .editar-btn i {
+          color: #4a6cf7;
+        }
+        .eliminar-btn i {
+          color: #e04f5f;
+        }
+    </style>
+</head>
+<body>
+
+<header class="fade-in">
+    <div class="container">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h1><i class="fas fa-wrench"></i> AUTO REPAIR</h1>
+        <nav id="nav">
+            <a href="usuarios-gestion.html">Usuarios</a>
+            <a href="superadmin-panel.html">Panel</a>
+            <a href="#" id="cerrar-sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero slide-up">
+    <div class="hero-content">
+        <h2>Talleres</h2>
+        <p>Gestioná los datos de tus talleres</p>
+    </div>
+</section>
+
+<section class="services fade-in">
+    <div class="service-grid" style="display: flex; flex-direction: column; align-items: center;">
+        <button id="btnMostrarFormulario"><i class="fas fa-plus"></i> Crear Taller</button>
+        <button id="btnListarTalleres"><i class="fas fa-list"></i> Listar Talleres</button>
+
+        <form id="formTaller" class="login-form">
+            <div class="input-group">
+                <i class="fas fa-building"></i>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del taller" required />
+            </div>
+            <div class="input-group">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="direccion" name="direccion" placeholder="Dirección" />
+            </div>
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="text" id="telefono" name="telefono" placeholder="Teléfono" />
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="correo" name="correo" placeholder="Correo electrónico" />
+            </div>
+            <div class="input-group">
+                <i class="fas fa-toggle-on"></i>
+                <select id="estado" name="estado" required>
+                    <option value="">Seleccionar estado</option>
+                    <option value="ACTIVO">Activo</option>
+                    <option value="SUSPENDIDO">Suspendido</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-star"></i>
+                <select id="plan" name="plan" required>
+                    <option value="">Seleccionar plan</option>
+                    <option value="BASICO">Básico</option>
+                    <option value="PREMIUM">Premium</option>
+                </select>
+            </div>
+            <div style="margin-top: 1em;">
+                <button type="submit"><i class="fas fa-save"></i> Guardar Taller</button>
+                <button type="button" id="btnCancelar" style="display:none;">Cancelar</button>
+            </div>
+            <p id="mensaje"></p>
+        </form>
+
+        <table id="tablaTalleres">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Plan</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</section>
+
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<script>
+    const token = localStorage.getItem('token');
+    const form = document.getElementById("formTaller");
+    const btnMostrarFormulario = document.getElementById("btnMostrarFormulario");
+    const btnListarTalleres = document.getElementById("btnListarTalleres");
+    const mensaje = document.getElementById("mensaje");
+    const tabla = document.getElementById("tablaTalleres").querySelector("tbody");
+    const btnCancelar = document.getElementById("btnCancelar");
+
+    let modoEdicion = false;
+    let idTallerActual = null;
+
+    btnMostrarFormulario.addEventListener("click", () => {
+      form.style.display = "block";
+      btnCancelar.style.display = "inline-block";
+      btnMostrarFormulario.style.display = "none";
+      btnListarTalleres.style.display = "none";
+      form.reset();
+      idTallerActual = null;
+      modoEdicion = false;
+      mensaje.textContent = "";
+    });
+
+    btnCancelar.addEventListener("click", () => {
+      form.style.display = "none";
+      btnCancelar.style.display = "none";
+      btnMostrarFormulario.style.display = "inline-block";
+      btnListarTalleres.style.display = "inline-block";
+      form.reset();
+      mensaje.textContent = "";
+      modoEdicion = false;
+      idTallerActual = null;
+    });
+
+    btnListarTalleres.addEventListener("click", () => {
+      listarTalleres();
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const taller = {
+        nombre: document.getElementById("nombre").value.trim(),
+        direccion: document.getElementById("direccion").value.trim(),
+        telefono: document.getElementById("telefono").value.trim(),
+        correo: document.getElementById("correo").value.trim(),
+        estado: document.getElementById("estado").value,
+        plan: document.getElementById("plan").value
+      };
+
+      if (!taller.nombre) return mostrarMensaje("⚠️ El nombre es obligatorio", "red");
+      if (!taller.estado) return mostrarMensaje("⚠️ Seleccioná un estado", "red");
+      if (!taller.plan) return mostrarMensaje("⚠️ Seleccioná un plan", "red");
+
+      let url = "http://localhost:8080/api/talleres";
+      let metodo = "POST";
+
+      if (modoEdicion) {
+        url += `/${idTallerActual}`;
+        metodo = "PUT";
+      }
+
+      try {
+        const res = await fetch(url, {
+          method: metodo,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(taller)
+        });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(errorText || "Error al guardar taller");
+        }
+
+        mostrarMensaje(modoEdicion ? "✅ Taller actualizado." : "✅ Taller creado.", "green");
+        form.reset();
+        form.style.display = "none";
+        btnCancelar.style.display = "none";
+        btnMostrarFormulario.style.display = "inline-block";
+        btnListarTalleres.style.display = "inline-block";
+        modoEdicion = false;
+        idTallerActual = null;
+        listarTalleres();
+
+      } catch (error) {
+        mostrarMensaje("❌ " + error.message, "red");
+      }
+    });
+
+    async function listarTalleres() {
+      try {
+        const res = await fetch("http://localhost:8080/api/talleres", {
+          headers: { "Authorization": "Bearer " + token }
+        });
+        if (!res.ok) throw new Error("Error al cargar talleres");
+
+        const talleres = await res.json();
+        tabla.innerHTML = "";
+        talleres.forEach(taller => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${taller.nombre}</td>
+            <td>${taller.direccion || ""}</td>
+            <td>${taller.telefono || ""}</td>
+            <td>${taller.correo || ""}</td>
+            <td>${taller.estado}</td>
+            <td>${taller.plan}</td>
+            <td>
+              <button class="editar-btn" data-id="${taller.id}" title="Editar taller"><i class="fas fa-edit"></i></button>
+              <button class="eliminar-btn" data-id="${taller.id}" title="Eliminar taller"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          `;
+          tabla.appendChild(tr);
+        });
+
+        document.querySelectorAll(".editar-btn").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-id");
+            try {
+              const res = await fetch(`http://localhost:8080/api/talleres/${id}`, {
+                headers: { "Authorization": "Bearer " + token }
+              });
+              if (!res.ok) throw new Error("No se pudo obtener taller");
+              const taller = await res.json();
+
+              modoEdicion = true;
+              idTallerActual = id;
+
+              form.style.display = "block";
+              btnCancelar.style.display = "inline-block";
+              btnMostrarFormulario.style.display = "none";
+              btnListarTalleres.style.display = "none";
+
+              document.getElementById("nombre").value = taller.nombre || "";
+              document.getElementById("direccion").value = taller.direccion || "";
+              document.getElementById("telefono").value = taller.telefono || "";
+              document.getElementById("correo").value = taller.correo || "";
+              document.getElementById("estado").value = (taller.estado || "").toUpperCase();
+              document.getElementById("plan").value = (taller.plan || "").toUpperCase();
+              mostrarMensaje("✏️ Editando taller.", "orange");
+
+              window.scrollTo({ top: form.offsetTop, behavior: "smooth" });
+            } catch {
+              mostrarMensaje("❌ Error al cargar taller.", "red");
+            }
+          });
+        });
+
+        document.querySelectorAll(".eliminar-btn").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const id = btn.getAttribute("data-id");
+            if (confirm("¿Seguro que querés eliminar este taller?")) {
+              try {
+                const res = await fetch(`http://localhost:8080/api/talleres/${id}`, {
+                  method: "DELETE",
+                  headers: { "Authorization": "Bearer " + token }
+                });
+                if (!res.ok) throw new Error("No se pudo eliminar taller");
+                listarTalleres();
+              } catch {
+                mostrarMensaje("❌ Error al eliminar taller.", "red");
+              }
+            }
+          });
+        });
+
+      } catch (error) {
+        alert("Error al listar talleres: " + error.message);
+      }
+    }
+
+    function mostrarMensaje(texto, color) {
+      mensaje.textContent = texto;
+      mensaje.style.color = color;
+    }
+
+    document.getElementById("cerrar-sesion")?.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    });
+
+    (async function protegerPagina() {
+      if (!token) {
+        alert('No estás logueado. Redirigiendo al login...');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      function obtenerRolesDesdeToken(token) {
+        try {
+          const payloadBase64 = token.split('.')[1];
+          const base64 = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
+          const payloadJson = decodeURIComponent(
+            atob(base64)
+              .split('')
+              .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+              .join('')
+          );
+          const payload = JSON.parse(payloadJson);
+          return payload.roles || [];
+        } catch (e) {
+          console.error('Error decodificando token:', e);
+          return [];
+        }
+      }
+
+      const roles = obtenerRolesDesdeToken(token);
+      const rolesPermitidos = ['ROLE_SUPERADMIN', 'ROLE_ADMIN'];
+      const tienePermiso = roles.some(r => rolesPermitidos.includes(r));
+
+      if (!tienePermiso) {
+        alert('No tenés permiso para acceder a esta página.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      listarTalleres();
+    })();
+</script>
+
+</body>
+</html>

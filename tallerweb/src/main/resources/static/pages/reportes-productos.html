@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reporte de Productos – AutoGest</title>
+
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+</head>
+<body>
+<div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <nav>
+            <a href="panel-admin.html"><i class="fas fa-home"></i> Inicio</a>
+            <a href="gestion-clientes.html"><i class="fas fa-users"></i> Clientes</a>
+            <a href="gestion-usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a>
+            <a href="gestion-vehiculos.html"><i class="fas fa-car-side"></i> Vehículos</a>
+            <a href="gestion-ordenes.html"><i class="fas fa-file-alt"></i> Órdenes</a>
+            <a href="panel-inteligencia.html"><i class="fas fa-brain"></i> Inteligencia</a>
+            <a href="gestion-categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+            <a href="gestion-productos.html"><i class="fas fa-boxes"></i> Productos</a>
+            <a href="reportes.html" class="active"><i class="fas fa-chart-line"></i> Reportes</a>
+            <a href="#" id="cerrar-sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            <p id="usuario-logueado" class="usuario-logueado">Cargando usuario...</p>
+        </nav>
+    </aside>
+
+    <!-- HEADER MÓVIL -->
+    <header class="mobile-header">
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+        <h1 class="logo-mobile">AutoGest</h1>
+        <span id="usuario-logueado-movil" class="usuario-logueado-movil">Cargando usuario...</span>
+    </header>
+
+    <!-- FONDO OSCURO -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CONTENIDO -->
+    <main>
+        <section class="hero slide-up">
+            <div class="hero-content">
+                <h2>Reporte de Productos</h2>
+                <p>Visualizá y exportá todos los productos del taller</p>
+            </div>
+        </section>
+
+        <!-- TARJETAS ESTADÍSTICAS -->
+        <section class="dashboard-cards" style="margin-bottom: 2rem;">
+            <div class="card-grid">
+                <div class="card" id="card-total-productos">
+                    <i class="fas fa-boxes fa-2x"></i>
+                    <h3>Total de Productos</h3>
+                    <p id="total-productos">0</p>
+                </div>
+                <div class="card" id="card-stock-total">
+                    <i class="fas fa-sort-numeric-up-alt fa-2x"></i>
+                    <h3>Stock Total</h3>
+                    <p id="stock-total">0</p>
+                </div>
+                <div class="card" id="card-valor-total">
+                    <i class="fas fa-dollar-sign fa-2x"></i>
+                    <h3>Valor Estimado</h3>
+                    <p id="valor-total">$ 0.00</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FILTRO POR CATEGORÍA -->
+        <section class="content-wrapper" style="margin-bottom: 1rem;">
+            <label for="filtroCategoria"><i class="fas fa-filter"></i> Filtrar por categoría:</label>
+            <select id="filtroCategoria">
+                <option value="">-- Todas --</option>
+            </select>
+            <div id="contadorProductos" style="margin-top: 0.5rem; font-weight: bold;"></div>
+        </section>
+
+        <!-- TABLA DE PRODUCTOS -->
+        <section class="content-wrapper">
+            <table id="tablaReporteProductos" class="display nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Observaciones</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+<script src="../js/reportes_productos.js"></script>
+<script src="../js/global.js"></script>
+</body>
+</html>

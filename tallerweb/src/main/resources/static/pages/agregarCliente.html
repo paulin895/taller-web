@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes – Auto Repair</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="clientes.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<header class="fade-in">
+    <div class="container">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h1><i class="fas fa-wrench"></i> AUTO REPAIR</h1>
+        <nav id="nav">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="login.html">Iniciar sesión</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero slide-up">
+    <div class="hero-content">
+        <h2>Clientes</h2>
+        <p>Gestioná los datos de tus clientes</p>
+    </div>
+</section>
+
+<section class="services fade-in">
+    <div class="service-grid">
+        <div class="service-card animate-card delay-0">
+            <h3>Formulario de Cliente</h3>
+            <form class="login-form" id="formCliente">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required />
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required />
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Correo electrónico" required />
+                </div>
+                <button type="submit"><i class="fas fa-save"></i> Guardar Cliente</button>
+            </form>
+            <p id="mensaje" style="margin-top: 10px;"></p>
+
+            <button id="btnListar"><i class="fas fa-list"></i> Listar Clientes</button>
+            <div id="seccionLista" style="display: none; margin-top: 2em;">
+                <input type="text" id="busqueda" placeholder="Buscar por nombre..." />
+                <table id="tablaClientes">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => {
+        nav.classList.toggle('show');
+        toggle.innerHTML = nav.classList.contains('show')
+            ? '<i class="fas fa-times"></i>'
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    const form = document.getElementById("formCliente");
+    const mensaje = document.getElementById("mensaje");
+    const tabla = document.getElementById("tablaClientes");
+    const tbody = tabla.querySelector("tbody");
+    const seccionLista = document.getElementById("seccionLista");
+    const busqueda = document.getElementById("busqueda");
+
+    let modoEdicion = false;
+    let idClienteActual = null;
+    let listaClientes = [];
+
+    document.getElementById("btnListar").addEventListener("click", () => {
+        seccionLista.style.display = "block";
+        listarClientes();
+    });
+
+    busqueda.addEventListener("input", () => filtrarClientes());
+
+    function listarClientes() {
+        fetch("http://localhost:8080/api/clientes")
+            .then(res => res.json())
+            .then(clientes => {
+                listaClientes = clientes;
+                mostrarClientes(listaClientes);
+            })
+            .catch(() => mostrarMensaje("❌ Error al cargar los clientes.", "red"));
+    }
+
+    function mostrarClientes(clientes) {
+        tbody.innerHTML = "";
+        clientes.forEach(cliente => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+      <td>${cliente.nombre}</td>
+      <td>${cliente.telefono}</td>
+      <td>${cliente.email}</td>
+      <td>
+        <button onclick="editarCliente(${cliente.id})"><i class="fas fa-edit"></i></button>
+        <button onclick="eliminarCliente(${cliente.id})"><i class="fas fa-trash-alt"></i></button>
+      </td>
+    `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function filtrarClientes() {
+        const texto = busqueda.value.toLowerCase();
+        const filtrados = listaClientes.filter(c => c.nombre.toLowerCase().includes(texto));
+        mostrarClientes(filtrados);
+    }
+
+    function editarCliente(id) {
+        fetch(`http://localhost:8080/api/clientes/${id}`)
+            .then(res => res.json())
+            .then(cliente => {
+                document.getElementById("nombre").value = cliente.nombre;
+                document.getElementById("telefono").value = cliente.telefono;
+                document.getElementById("email").value = cliente.email;
+                modoEdicion = true;
+                idClienteActual = id;
+                mostrarMensaje("✏️ Editando cliente. Guardá los cambios.", "orange");
+            });
+    }
+
+    function eliminarCliente(id) {
+        if (!confirm("¿Estás seguro de eliminar este cliente?")) return;
+        fetch(`http://localhost:8080/api/clientes/${id}`, { method: "DELETE" })
+            .then(res => {
+                if (res.ok) {
+                    mostrarMensaje("🗑️ Cliente eliminado.", "green");
+                    listarClientes();
+                } else {
+                    mostrarMensaje("⚠️ Error al eliminar cliente.", "red");
+                }
+            });
+    }
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const nombre = document.getElementById("nombre").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        const telefonoRegex = /^[0-9\s\-()+]+$/;
+        const emailRegex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+
+        if (!telefonoRegex.test(telefono)) return mostrarMensaje("⚠️ El teléfono contiene caracteres inválidos.", "red");
+        if (!emailRegex.test(email)) return mostrarMensaje("⚠️ El email no es válido.", "red");
+        if (nombre.length < 3) return mostrarMensaje("⚠️ El nombre debe tener al menos 3 caracteres.", "red");
+
+        const data = { nombre, telefono, email };
+        const url = modoEdicion ? `http://localhost:8080/api/clientes/${idClienteActual}` : "http://localhost:8080/api/clientes";
+        const metodo = modoEdicion ? "PUT" : "POST";
+
+        fetch(url, {
+            method: metodo,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    mostrarMensaje(modoEdicion ? "✅ Cliente actualizado." : "✅ Cliente guardado.", "green");
+                    form.reset();
+                    modoEdicion = false;
+                    idClienteActual = null;
+                    listarClientes();
+                } else {
+                    mostrarMensaje("⚠️ Error al guardar.", "red");
+                }
+            })
+            .catch(() => mostrarMensaje("❌ Error de conexión.", "red"));
+    });
+
+    function mostrarMensaje(texto, color) {
+        mensaje.textContent = texto;
+        mensaje.style.color = color;
+    }
+</script>
+
+</body>
+</html>

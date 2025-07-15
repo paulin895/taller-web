@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Iniciar sesión – AutoGest</title>
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- HEADER MÓVIL -->
+<header class="mobile-header">
+    <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+    <h1 class="logo-mobile"><i class="fas fa-wrench"></i> AutoGest</h1>
+</header>
+
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="container">
+
+    <!-- SIDEBAR SIMBÓLICO SOLO PARA COHERENCIA VISUAL -->
+    <aside class="sidebar sidebar-login" id="sidebar">
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <p class="bienvenida-login">Bienvenido al sistema</p>
+    </aside>
+
+    <!-- OVERLAY PARA MOBILE -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- LOGIN FORM -->
+    <main class="main-login">
+        <section class="login-card">
+            <h2><i class="fas fa-user-circle"></i> Iniciar Sesión</h2>
+            <p>Ingresá tus correo y contraseña para ingresar</p>
+
+            <form id="form-login" class="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required />
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required />
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Ingresar
+                </button>
+                <p id="mensaje-login" style="margin-top: 10px;"></p>
+            </form>
+        </section>
+    </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+
+<script>
+    function decodificarToken(token) {
+        try {
+            const payloadBase64 = token.split('.')[1];
+            const base64 = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
+            const payloadJson = decodeURIComponent(
+                atob(base64)
+                    .split('')
+                    .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                    .join('')
+            );
+            console.log("Payload JWT decodificado:", payloadJson);
+            return JSON.parse(payloadJson);
+        } catch (e) {
+            console.error("Error al decodificar token:", e);
+            return null;
+        }
+    }
+
+    document.getElementById("form-login").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("usuario").value;
+        const contrasena = document.getElementById("contrasena").value;
+        const mensaje = document.getElementById("mensaje-login");
+
+        mensaje.textContent = "";
+
+        try {
+            const respuesta = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: email, password: contrasena })
+            });
+
+            if (!respuesta.ok) {
+                mensaje.textContent = "Usuario o contraseña incorrectos.";
+                mensaje.style.color = "red";
+                return;
+            }
+
+            const datos = await respuesta.json();
+
+            if (!datos.token) {
+                mensaje.textContent = "Token no recibido.";
+                mensaje.style.color = "red";
+                return;
+            }
+
+            console.log("Token recibido:", datos.token);
+            localStorage.setItem("token", datos.token);
+
+            const payload = decodificarToken(datos.token);
+            const rol = payload?.roles?.[0] || null;
+            const tallerId = payload?.tallerId || null;
+
+            if (!rol) {
+                mensaje.textContent = "Error al obtener rol del usuario.";
+                mensaje.style.color = "red";
+                return;
+            }
+
+            if (tallerId) {
+                localStorage.setItem("tallerId", tallerId);
+                console.log("Taller ID guardado:", tallerId);
+            }
+
+            mensaje.textContent = "¡Bienvenido!";
+            mensaje.style.color = "green";
+
+            // Redirección según el rol
+            if (rol === "ROLE_SUPERADMIN") {
+                window.location.href = "superadmin-panel.html";
+            } else if (rol === "ROLE_ADMIN") {
+                window.location.href = "panel-admin.html";
+            } else if (rol === "ROLE_MECANICO") {
+                window.location.href = "panel-mecanico.html";
+            } else {
+                window.location.href = "panel.html";
+            }
+
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+            mensaje.textContent = "Error del servidor.";
+            mensaje.style.color = "red";
+        }
+    });
+
+
+    function decodificarToken(token) {
+        try {
+            const payloadBase64 = token.split('.')[1];
+            const base64 = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
+            const payloadJson = decodeURIComponent(
+                atob(base64)
+                    .split('')
+                    .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                    .join('')
+            );
+            console.log("Payload JWT decodificado:", payloadJson);
+            return JSON.parse(payloadJson);
+        } catch (e) {
+            console.error("Error al decodificar token:", e);
+            return null;
+        }
+    }
+
+    document.getElementById("form-login").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("usuario").value;
+        const contrasena = document.getElementById("contrasena").value;
+        const mensaje = document.getElementById("mensaje-login");
+
+        mensaje.textContent = "";
+
+        try {
+            const respuesta = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: email, password: contrasena })
+            });
+
+            if (!respuesta.ok) {
+                mensaje.textContent = "Usuario o contraseña incorrectos.";
+                mensaje.style.color = "red";
+                return;
+            }
+
+            const datos = await respuesta.json();
+
+            if (!datos.token) {
+                mensaje.textContent = "Token no recibido.";
+                mensaje.style.color = "red";
+                return;
+            }
+
+            console.log("Token recibido:", datos.token);
+            localStorage.setItem("token", datos.token);
+
+            const payload = decodificarToken(datos.token);
+            const rol = payload?.roles?.[0] || null;
+            const tallerId = payload?.tallerId || null;
+
+            if (!rol) {
+                mensaje.textContent = "Error al obtener rol del usuario.";
+                mensaje.style.color = "red";
+                return;
+            }
+
+            if (tallerId) {
+                localStorage.setItem("tallerId", tallerId);
+                console.log("Taller ID guardado:", tallerId);
+            }
+
+            mensaje.textContent = "¡Bienvenido!";
+            mensaje.style.color = "green";
+
+            // Redirección según el rol
+            if (rol === "ROLE_SUPERADMIN") {
+                window.location.href = "superadmin-panel.html";
+            } else if (rol === "ROLE_ADMIN") {
+                window.location.href = "panel-admin.html";
+            } else if (rol === "ROLE_MECANICO") {
+                window.location.href = "panel-mecanico.html";
+            } else {
+                window.location.href = "panel.html";
+            }
+
+        } catch (error) {
+            console.error("Error al iniciar sesión:", error);
+            mensaje.textContent = "Error del servidor.";
+            mensaje.style.color = "red";
+        }
+    });
+</script>
+
+

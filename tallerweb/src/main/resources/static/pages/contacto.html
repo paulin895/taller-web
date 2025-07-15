@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto – Auto Repair</title>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<header class="fade-in">
+    <div class="container">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h1><i class="fas fa-wrench"></i> AUTO REPAIR</h1>
+        <nav id="nav">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html">Quiénes somos</a>
+            <a href="contacto.html" class="active">Contacto</a>
+            <a href="login.html">Iniciar sesión</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero slide-up">
+    <div class="hero-content">
+        <h2>CONTACTO</h2>
+        <p>¿Tenés dudas? Escribinos o visitanos</p>
+    </div>
+</section>
+
+<section class="services fade-in">
+    <div class="service-grid">
+        <div class="service-card animate-card delay-0">
+            <h3>Enviános tu consulta</h3>
+            <form class="login-form" action="#" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="nombre" placeholder="Tu nombre" required />
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" placeholder="Tu correo electrónico" required />
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" name="tel" placeholder="Tu teléfono" />
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-comment"></i>
+                    <textarea name="mensaje" placeholder="Tu mensaje" rows="4" required></textarea>
+                </div>
+
+                <button type="submit"><i class="fas fa-paper-plane"></i> Enviar</button>
+            </form>
+        </div>
+
+        <div class="service-card animate-card delay-1">
+            <h3>Datos de contacto</h3>
+            <div class="info-item"><i class="fas fa-phone"></i> (+598) 2900 1234</div>
+            <div class="info-item"><i class="fab fa-whatsapp"></i> +598 99 123 456</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> contacto@autorepair.com</div>
+            <div class="info-item"><i class="fas fa-clock"></i> Lunes a Viernes: 08:00 - 18:00</div>
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Avenida Principal 1234, Punta del Este</div>
+            <div class="map-container">
+                <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3426.502378531716!2d-54.95108468475536!3d-34.961834380383465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a032962d5dd475%3A0x857f0e78b9f7f58d!2sPunta%20del%20Este%2C%20Departamento%20de%20Maldonado!5e0!3m2!1ses-419!2suy!4v1620000000000!5m2!1ses-419!2suy"
+                        width="100%" height="200" style="border:0; border-radius: 8px; margin-top: 10px;" allowfullscreen="" loading="lazy">
+                </iframe>
+
+    </div>
+</section>
+
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+
+    toggle.addEventListener('click', () => {
+        nav.classList.toggle('show');
+        toggle.innerHTML = nav.classList.contains('show')
+            ? '<i class="fas fa-times"></i>'
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-card-visible');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.fade-in, .slide-up, .animate-card').forEach(el => {
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>

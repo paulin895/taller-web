@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Asistente Inteligente – AutoGest</title>
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <nav>
+            <a href="panel-admin.html"><i class="fas fa-home"></i> Inicio</a>
+            <a href="gestion-clientes.html"><i class="fas fa-users"></i> Clientes</a>
+            <a href="gestion-usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a>
+            <a href="gestion-vehiculos.html"><i class="fas fa-car-side"></i> Vehículos</a>
+            <a href="gestion-ordenes.html"><i class="fas fa-file-alt"></i> Órdenes</a>
+            <a href="panel-inteligencia.html" class="active"><i class="fas fa-brain"></i> Inteligencia</a>
+            <a href="gestion-productos.html"><i class="fas fa-boxes"></i> Productos</a>
+            <a href="gestion-categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+            <a href="reportes.html" class="active"><i class="fas fa-chart-line"></i> Reportes</a>
+            <a href="#" id="cerrar-sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            <p id="usuario-logueado" class="usuario-logueado">Cargando usuario...</p>
+        </nav>
+    </aside>
+
+    <!-- HEADER MÓVIL -->
+    <header class="mobile-header">
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+        <h1 class="logo-mobile">AutoGest</h1>
+        <span id="usuario-logueado-movil" class="usuario-logueado-movil">Cargando usuario...</span>
+    </header>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <section class="titulo-clientes">
+            <div class="header-clientes">
+                <h1><i class="fas fa-brain"></i> Asistente Inteligente</h1>
+            </div>
+        </section>
+
+        <section class="content-wrapper">
+            <p class="subtitulo">Consultá sobre mantenimiento, códigos de error, aceites recomendados y más.</p>
+
+            <div class="form-ai-card">
+                <h2>Asistente Inteligente</h2>
+                <textarea id="pregunta" placeholder="Ejemplo: ¿Qué aceite lleva un Peugeot 206 1.6?" rows="6"></textarea>
+                <button class="btn btn-consultar" id="btn-consultar">
+                    <i class="fas fa-paper-plane"></i> Consultar
+                </button>
+                <div id="respuesta" class="respuesta"></div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<script src="../js/vehiculos.js"></script>
+
+</body>
+</html>

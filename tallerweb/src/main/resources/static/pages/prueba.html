@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Crear Cliente – AutoGest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Segoe UI', sans-serif;
+          background: #f9f9f9;
+          margin: 0;
+          padding: 0;
+          color: #333;
+        }
+
+        .container {
+          display: flex;
+          min-height: 100vh;
+        }
+
+        aside {
+          width: 240px;
+          background-color: #f0f4f8;
+          padding: 1rem;
+        }
+
+        aside h2 {
+          font-size: 1.2rem;
+          margin-bottom: 1.5rem;
+          color: #005a87;
+        }
+
+        aside nav a {
+          display: flex;
+          align-items: center;
+          padding: 0.5rem;
+          margin-bottom: 0.5rem;
+          text-decoration: none;
+          color: #333;
+          border-radius: 6px;
+        }
+
+        aside nav a:hover,
+        aside nav a.active {
+          background-color: #d9e9f4;
+          color: #005a87;
+        }
+
+        aside nav a i {
+          margin-right: 10px;
+        }
+
+        main {
+          flex: 1;
+          padding: 2rem;
+          background-color: white;
+        }
+
+        header {
+          display: none;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          max-width: 500px;
+        }
+
+        label {
+          margin-bottom: 5px;
+          font-weight: 600;
+        }
+
+        input, textarea {
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 1rem;
+        }
+
+        button {
+          padding: 0.7rem;
+          background-color: #005aef;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+
+        button:hover {
+          background-color: #0041b3;
+        }
+
+        @media (max-width: 768px) {
+          .container {
+            flex-direction: column;
+          }
+
+          aside {
+            display: none;
+          }
+
+          header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          }
+
+          .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #005aef;
+          }
+
+          .menu-toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
+          }
+
+          main {
+            padding: 1rem;
+          }
+
+          form {
+            width: 100%;
+          }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <aside>
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <nav>
+            <a href="#" class="active"><i class="fas fa-file-alt"></i> Órdenes</a>
+            <a href="#"><i class="fas fa-users"></i> Clientes</a>
+            <a href="#"><i class="fas fa-car-side"></i> Vehículos</a>
+            <a href="#"><i class="fas fa-wrench"></i> Mecánicos</a>
+        </nav>
+    </aside>
+
+    <main>
+        <header>
+            <div class="logo">AutoGest</div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        </header>
+
+        <h1>CREAR CLIENTE</h1>
+        <form>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required />
+
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com" />
+
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="099 123 456" />
+
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" placeholder="Ej: Calle 123" />
+
+            <label for="notas">Notas</label>
+            <textarea id="notas" name="notas" rows="3" placeholder="Información adicional..."></textarea>
+
+            <button type="submit">CREAR CLIENTE</button>
+        </form>
+    </main>
+</div>
+</body>
+</html>

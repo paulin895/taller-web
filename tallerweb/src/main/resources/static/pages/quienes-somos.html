@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiénes somos – Auto Repair</title>
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<header class="fade-in">
+    <div class="container">
+        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h1><i class="fas fa-wrench"></i> AUTO REPAIR</h1>
+        <nav id="nav">
+            <a href="index.html">Inicio</a>
+            <a href="quienes-somos.html" class="active">Quiénes somos</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="login.html">Iniciar sesión</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero slide-up">
+    <div class="hero-content">
+        <h2>QUIÉNES SOMOS</h2>
+        <p>Confianza, experiencia y servicio garantizado</p>
+    </div>
+</section>
+
+<section class="services fade-in">
+    <h3>Nuestra Historia</h3>
+    <div class="service-grid">
+        <div class="service-card animate-card">
+            <i class="fas fa-user-cog"></i>
+            <h4>Profesionales con experiencia</h4>
+            <p>Más de 20 años reparando y manteniendo vehículos de todas las marcas.</p>
+        </div>
+        <div class="service-card animate-card delay-1">
+            <i class="fas fa-handshake"></i>
+            <h4>Compromiso con el cliente</h4>
+            <p>Nos enfocamos en brindar un trato personalizado, honesto y eficiente.</p>
+        </div>
+        <div class="service-card animate-card delay-2">
+            <i class="fas fa-star"></i>
+            <h4>Calidad garantizada</h4>
+            <p>Utilizamos tecnología moderna y repuestos certificados para resultados duraderos.</p>
+        </div>
+        <div class="service-card animate-card delay-3">
+            <i class="fas fa-users"></i>
+            <h4>Equipo capacitado</h4>
+            <p>Contamos con un equipo técnico en formación constante, listo para ayudarte.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+
+    toggle.addEventListener('click', () => {
+        nav.classList.toggle('show');
+        toggle.innerHTML = nav.classList.contains('show')
+            ? '<i class="fas fa-times"></i>'
+            : '<i class="fas fa-bars"></i>';
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Categorías – AutoGest</title>
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+</head>
+<body>
+<div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <nav>
+            <a href="panel-admin.html"><i class="fas fa-home"></i> Inicio</a>
+            <a href="gestion-clientes.html"><i class="fas fa-users"></i> Clientes</a>
+            <a href="gestion-usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a>
+            <a href="gestion-vehiculos.html"><i class="fas fa-car-side"></i> Vehículos</a>
+            <a href="gestion-ordenes.html"><i class="fas fa-file-alt"></i> Órdenes</a>
+            <a href="panel-inteligencia.html"><i class="fas fa-brain"></i> Inteligencia</a>
+            <a href="gestion-productos.html"><i class="fas fa-boxes"></i> Productos</a>
+            <a href="gestion-categorias.html" class="active"><i class="fas fa-tags"></i> Categorías</a>
+            <a href="reportes.html" class="active"><i class="fas fa-chart-line"></i> Reportes</a>
+            <a href="#" id="cerrar-sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            <p id="usuario-logueado" class="usuario-logueado">Cargando usuario...</p>
+        </nav>
+    </aside>
+
+    <!-- HEADER MÓVIL -->
+    <header class="mobile-header">
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+        <h1 class="logo-mobile">AutoGest</h1>
+        <span id="usuario-logueado-movil" class="usuario-logueado-movil">Cargando usuario...</span>
+    </header>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <section class="titulo-clientes">
+            <div class="header-clientes">
+                <h1><i class="fas fa-tags"></i> Gestión de Categorías</h1>
+            </div>
+        </section>
+
+        <section class="content-wrapper">
+            <!-- FORMULARIO -->
+            <form id="formCategoria">
+                <h2>Agregar Categoría</h2>
+
+                <label for="nombre">Nombre *</label>
+                <input type="text" id="nombre" required />
+
+                <label for="observaciones">Observaciones</label>
+                <textarea id="observaciones"></textarea>
+
+                <input type="hidden" id="categoriaId" />
+
+                <button type="submit" id="btn-guardar">Guardar</button>
+                <span class="message" id="mensaje"></span>
+            </form>
+
+            <!-- TABLA -->
+            <div class="tabla-container">
+                <table id="tablaCategorias" class="display nowrap" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="../js/categorias.js"></script>
+</body>
+</html>

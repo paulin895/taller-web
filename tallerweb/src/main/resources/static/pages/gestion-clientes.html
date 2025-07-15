@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Clientes – AutoGest</title>
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+</head>
+<body>
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <nav>
+            <a href="panel-admin.html"><i class="fas fa-home"></i> Inicio</a>
+            <a href="gestion-clientes.html" class="active"><i class="fas fa-users"></i> Clientes</a>
+            <a href="gestion-usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a>
+            <a href="gestion-vehiculos.html"><i class="fas fa-car-side"></i> Vehículos</a>
+            <a href="gestion-ordenes.html"><i class="fas fa-file-alt"></i> Órdenes</a>
+            <a href="panel-inteligencia.html"><i class="fas fa-brain"></i> Inteligencia</a>
+            <a href="gestion-productos.html"><i class="fas fa-boxes"></i> Productos</a>
+            <a href="gestion-categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+            <a href="reportes.html" class="active"><i class="fas fa-chart-line"></i> Reportes</a>
+            <a href="#" id="cerrar-sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            <p id="usuario-logueado" class="usuario-logueado">Cargando usuario...</p>
+        </nav>
+    </aside>
+
+    <!-- HEADER MÓVIL -->
+    <header class="mobile-header">
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+        <h1 class="logo-mobile">AutoGest</h1>
+        <span id="usuario-logueado-movil" class="usuario-logueado-movil">Cargando usuario...</span>
+    </header>
+
+    <!-- FONDO OSCURO AL ACTIVAR MENÚ -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <section class="titulo-clientes">
+            <div class="header-clientes">
+                <h1>Gestión de Clientes</h1>
+            </div>
+            <button id="btn-ver-modal-clientes" class="btn-ver-clientes">
+                👁️ Buscar clientes
+            </button>
+
+            <div id="mensaje-error-taller" class="message error" style="display:none;">
+                No se encontró el taller asociado. Contacta con el administrador.
+            </div>
+        </section>
+
+        <section class="content-wrapper">
+            <form id="form-cliente" style="display:none;">
+                <input type="hidden" id="cliente-id" />
+                <h1>Agregar Clientes</h1>
+
+                <label for="nombreCompleto">Nombre completo:</label>
+                <input type="text" id="nombreCompleto" required />
+                <label for="ci">Cédula:</label>
+                <input type="text" id="ci" />
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" />
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" />
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" />
+                <label for="observaciones">Observaciones:</label>
+                <textarea id="observaciones" rows="3"></textarea>
+                <button type="submit" id="btn-guardar">Guardar</button>
+            </form>
+
+            <div class="tabla-container" style="display:none;">
+                <table id="tabla-clientes" class="display" style="width:100%;">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cédula</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Dirección</th>
+                        <th>Observaciones</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<!-- MODAL DE CLIENTES -->
+<div id="modal-clientes" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Clientes registrados</h2>
+            <span class="close-modal" id="cerrar-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <table id="tabla-clientes-modal" class="display" style="width:100%;">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cédula</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script src="../js/clientes.js"></script>
+
+
+</body>
+</html>

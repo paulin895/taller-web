@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reporte de Órdenes – AutoGest</title>
+
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+</head>
+<body>
+<div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <h2><i class="fas fa-car"></i> AutoGest</h2>
+        <nav>
+            <a href="panel-admin.html"><i class="fas fa-home"></i> Inicio</a>
+            <a href="gestion-clientes.html"><i class="fas fa-users"></i> Clientes</a>
+            <a href="gestion-usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a>
+            <a href="gestion-vehiculos.html"><i class="fas fa-car-side"></i> Vehículos</a>
+            <a href="gestion-ordenes.html"><i class="fas fa-file-alt"></i> Órdenes</a>
+            <a href="panel-inteligencia.html"><i class="fas fa-brain"></i> Inteligencia</a>
+            <a href="gestion-productos.html"><i class="fas fa-boxes"></i> Productos</a>
+            <a href="gestion-categorias.html"><i class="fas fa-tags"></i> Categorías</a>
+            <a href="reportes.html" class="active"><i class="fas fa-chart-line"></i> Reportes</a>
+            <a href="#" id="cerrar-sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            <p id="usuario-logueado" class="usuario-logueado">Cargando usuario...</p>
+        </nav>
+    </aside>
+
+    <!-- HEADER MÓVIL -->
+    <header class="mobile-header">
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+        <h1 class="logo-mobile">AutoGest</h1>
+        <span id="usuario-logueado-movil" class="usuario-logueado-movil">Cargando usuario...</span>
+    </header>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <section class="hero slide-up">
+            <div class="hero-content">
+                <h2>Reporte de Órdenes</h2>
+                <p>Visualizá la actividad del taller por mes e ingresos</p>
+            </div>
+        </section>
+
+        <!-- TARJETAS ESTADÍSTICAS -->
+        <section class="dashboard-cards" style="margin-bottom: 2rem;">
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-file-alt fa-2x"></i>
+                    <h3>Total Órdenes</h3>
+                    <p id="total-ordenes">0</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-dollar-sign fa-2x"></i>
+                    <h3>Total Ingresos</h3>
+                    <p id="total-ingresos">$ 0.00</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-clock fa-2x"></i>
+                    <h3>En proceso</h3>
+                    <p id="ordenes-proceso">0</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-check fa-2x"></i>
+                    <h3>Cerradas</h3>
+                    <p id="ordenes-cerradas">0</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-hourglass-start fa-2x"></i>
+                    <h3>Pendientes</h3>
+                    <p id="ordenes-pendientes">0</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FILTROS -->
+        <section class="content-wrapper" style="margin-bottom: 2rem;">
+            <label for="filtroEstado"><i class="fas fa-filter"></i> Estado:</label>
+            <select id="filtroEstado">
+                <option value="">-- Todos --</option>
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="EN_PROCESO">En proceso</option>
+                <option value="CERRADA">Cerrada</option>
+            </select>
+
+            <label for="filtroDesde" style="margin-left: 1rem;">Desde:</label>
+            <input type="date" id="filtroDesde" />
+
+            <label for="filtroHasta" style="margin-left: 1rem;">Hasta:</label>
+            <input type="date" id="filtroHasta" />
+
+            <button id="btnAplicarFiltros" class="btn" style="margin-left: 1rem;"><i class="fas fa-filter"></i> Aplicar</button>
+        </section>
+
+        <!-- GRÁFICOS -->
+        <section class="content-wrapper" style="margin-bottom: 3rem;">
+            <canvas id="graficoOrdenes" style="max-width: 100%; margin-bottom: 2rem;"></canvas>
+            <canvas id="graficoIngresos" style="max-width: 100%;"></canvas>
+        </section>
+
+        <!-- TABLA DE ÓRDENES -->
+        <section class="content-wrapper">
+            <h3 style="margin-bottom: 1rem;">Órdenes encontradas</h3>
+            <table id="tablaReporteOrdenes" class="display nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Vehículo</th>
+                    <th>Mecánico</th>
+                    <th>Fecha Entrada</th>
+                    <th>Fecha Cierre</th>
+                    <th>Estado</th>
+                    <th>Precio</th>
+                    <th>Descripción</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<footer class="fade-in">
+    &copy; DePunta Software. Todos los derechos reservados.
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="../js/reportes_ordenes.js"></script>
+<script src="../js/global.js"></script>
+</body>
+</html>
