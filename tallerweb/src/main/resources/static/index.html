@@ -9,155 +9,156 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
 
 <!-- Header -->
-<header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center p-4">
-        <a href="#inicio" class="text-2xl font-bold text-blue-600">Autoges</a>
-        <nav class="space-x-6 text-gray-700 font-semibold hidden md:flex">
-            <a href="#inicio" class="hover:text-blue-600 transition">Inicio</a>
-            <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
-            <a href="#precios" class="hover:text-blue-600 transition">Precios</a>
-            <a href="#testimonios" class="hover:text-blue-600 transition">Testimonios</a>
-            <a href="#contacto" class="hover:text-blue-600 transition">Contacto</a>
-            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Iniciar sesión</a>
+<header>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="#inicio" class="text-2xl font-bold text-blue-600">Autoges</a>
+            <nav class="space-x-6 text-gray-700 font-semibold hidden md:flex">
+                <a href="#inicio" class="hover:text-blue-600 transition">Inicio</a>
+                <a href="#funcionalidades" class="hover:text-blue-600 transition">Funcionalidades</a>
+                <a href="#precios" class="hover:text-blue-600 transition">Precios</a>
+                <a href="#testimonios" class="hover:text-blue-600 transition">Testimonios</a>
+                <a href="#contacto" class="hover:text-blue-600 transition">Contacto</a>
+                <a href="pages/login.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Iniciar sesión</a>
+            </nav>
+            <button id="menu-btn" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <nav id="mobile-menu" class="hidden bg-white md:hidden px-4 pb-4">
+            <a href="#inicio" class="block py-2 border-b border-gray-200 hover:text-blue-600">Inicio</a>
+            <a href="#funcionalidades" class="block py-2 border-b border-gray-200 hover:text-blue-600">Funcionalidades</a>
+            <a href="#precios" class="block py-2 border-b border-gray-200 hover:text-blue-600">Precios</a>
+            <a href="#testimonios" class="block py-2 border-b border-gray-200 hover:text-blue-600">Testimonios</a>
+            <a href="#contacto" class="block py-2 border-b border-gray-200 hover:text-blue-600">Contacto</a>
+            <a href="pages/login.html" class="block mt-2 text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Iniciar sesión</a>
         </nav>
-        <button id="menu-btn" class="md:hidden focus:outline-none">
-            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-    </div>
-    <nav id="mobile-menu" class="hidden bg-white md:hidden px-4 pb-4">
-        <a href="#inicio" class="block py-2 border-b border-gray-200 hover:text-blue-600">Inicio</a>
-        <a href="#funcionalidades" class="block py-2 border-b border-gray-200 hover:text-blue-600">Funcionalidades</a>
-        <a href="#precios" class="block py-2 border-b border-gray-200 hover:text-blue-600">Precios</a>
-        <a href="#testimonios" class="block py-2 border-b border-gray-200 hover:text-blue-600">Testimonios</a>
-        <a href="#contacto" class="block py-2 border-b border-gray-200 hover:text-blue-600">Contacto</a>
-        <a href="#" class="block mt-2 text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Iniciar sesión</a>
-    </nav>
-</header>
 
-<!-- Hero -->
-<section id="inicio" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-20 px-4 text-center">
-    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 animate-fade-in-down">Gestioná tu taller con <span class="text-yellow-300">Autoges</span></h1>
-    <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Sistema web para talleres mecánicos: clientes, vehículos, stock, reparaciones y más.</p>
-    <div class="space-x-4">
-        <a href="#contacto" class="inline-block bg-yellow-400 text-blue-900 font-semibold px-6 py-3 rounded shadow hover:bg-yellow-300 transition">Probar gratis</a>
-        <a href="#capturas" class="inline-block border border-white px-6 py-3 rounded hover:bg-white hover:text-blue-700 transition">Ver demo</a>
-    </div>
-</section>
-
-<!-- Funcionalidades -->
-<section id="funcionalidades" class="py-16 px-4 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12">Funcionalidades que tu taller necesita</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-        <!-- Reutilizando tarjetas existentes -->
-        <!-- Podés dejar todo esto igual, ya está bien -->
-    </div>
-</section>
-
-<!-- Capturas -->
-<section id="capturas" class="bg-white py-16 px-4 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12">Así se ve Autoges</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Captura sistema 1" class="rounded shadow-md hover:scale-105 transition" />
-        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Captura sistema 2" class="rounded shadow-md hover:scale-105 transition" />
-        <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=600&q=80" alt="Captura sistema 3" class="rounded shadow-md hover:scale-105 transition" />
-    </div>
-</section>
-
-<!-- Precios -->
-<section id="precios" class="py-16 px-4 max-w-6xl mx-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg">
-    <h2 class="text-3xl font-bold text-center mb-12">Planes y Precios</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <!-- Plan Gratis -->
-        <div class="bg-white text-blue-800 p-8 rounded-lg shadow-lg text-center">
-            <h3 class="text-xl font-semibold mb-4">Plan Gratis</h3>
-            <p class="mb-6">Ideal para probar el sistema con funciones limitadas.</p>
-            <p class="text-3xl font-bold mb-6">$0 / mes</p>
-            <button class="bg-yellow-400 text-blue-900 px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition">Probar Gratis</button>
+    </header>
+    <!-- Hero -->
+    <section id="inicio" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-20 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 animate-fade-in-down">Gestioná tu taller con <span class="text-yellow-300">Autoges</span></h1>
+        <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Sistema web para talleres mecánicos: clientes, vehículos, stock, reparaciones y más.</p>
+        <div class="space-x-4">
+            <a href="#contacto" class="inline-block bg-yellow-400 text-blue-900 font-semibold px-6 py-3 rounded shadow hover:bg-yellow-300 transition">Probar gratis</a>
+            <a href="#capturas" class="inline-block border border-white px-6 py-3 rounded hover:bg-white hover:text-blue-700 transition">Ver demo</a>
         </div>
-        <!-- Plan Pro -->
-        <div class="bg-blue-700 p-8 rounded-lg shadow-lg text-center">
-            <h3 class="text-xl font-semibold mb-4">Plan Pro</h3>
-            <p class="mb-6">Funciones completas para talleres con alta demanda.</p>
-            <p class="text-3xl font-bold mb-6">$25 / mes</p>
-            <button class="bg-yellow-400 text-blue-900 px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition">Contratar</button>
-        </div>
-        <!-- Plan Premium -->
-        <div class="bg-blue-700 p-8 rounded-lg shadow-lg text-center">
-            <h3 class="text-xl font-semibold mb-4">Plan Premium</h3>
-            <p class="mb-6">Soporte dedicado y personalización avanzada.</p>
-            <p class="text-3xl font-bold mb-6">Consulte</p>
-            <button class="bg-yellow-400 text-blue-900 px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition">Contactar</button>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Testimonios -->
-<section id="testimonios" class="py-16 px-4 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-12">Qué dicen nuestros clientes</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <blockquote class="bg-gray-100 p-6 rounded shadow hover:shadow-md transition">
-            <p class="italic mb-4">"Autoges nos ayudó a organizar todas las reparaciones y mantener un control total del taller."</p>
-            <footer class="font-semibold">— Taller El Rayo, Montevideo</footer>
-        </blockquote>
-        <blockquote class="bg-gray-100 p-6 rounded shadow hover:shadow-md transition">
-            <p class="italic mb-4">"Con Autoges, el stock de repuestos nunca se nos descontrola y el historial de autos es muy claro."</p>
-            <footer class="font-semibold">— Mecánica López, Maldonado</footer>
-        </blockquote>
-        <blockquote class="bg-gray-100 p-6 rounded shadow hover:shadow-md transition">
-            <p class="italic mb-4">"Sistema fácil de usar y que funciona rápido. Recomendado para cualquier taller."</p>
-            <footer class="font-semibold">— Talleres Pérez, Canelones</footer>
-        </blockquote>
-    </div>
-</section>
+    <!-- Funcionalidades -->
+    <section id="funcionalidades" class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Funcionalidades que tu taller necesita</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            <!-- Reutilizando tarjetas existentes -->
+            <!-- Podés dejar todo esto igual, ya está bien -->
+        </div>
+    </section>
 
-<!-- Contacto -->
-<section id="contacto" class="bg-white py-16 px-4 max-w-4xl mx-auto rounded shadow-md">
-    <h2 class="text-3xl font-bold text-center mb-8">Contacto</h2>
-    <form class="max-w-xl mx-auto space-y-6" onsubmit="event.preventDefault(); alert('Mensaje enviado (simulado)'); this.reset();">
-        <div>
-            <label class="block mb-2 font-semibold" for="nombre">Nombre</label>
-            <input id="nombre" type="text" required
-                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+    <!-- Capturas -->
+    <section id="capturas" class="bg-white py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Así se ve Autoges</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Captura sistema 1" class="rounded shadow-md hover:scale-105 transition" />
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Captura sistema 2" class="rounded shadow-md hover:scale-105 transition" />
+            <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=600&q=80" alt="Captura sistema 3" class="rounded shadow-md hover:scale-105 transition" />
         </div>
-        <div>
-            <label class="block mb-2 font-semibold" for="email">Email</label>
-            <input id="email" type="email" required
-                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
-        </div>
-        <div>
-            <label class="block mb-2 font-semibold" for="taller">Nombre del Taller</label>
-            <input id="taller" type="text" required
-                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
-        </div>
-        <div>
-            <label class="block mb-2 font-semibold" for="mensaje">Mensaje</label>
-            <textarea id="mensaje" rows="4" required
-                      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
-        </div>
-        <button type="submit"
-                class="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition w-full">Enviar Mensaje</button>
-    </form>
-</section>
+    </section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-gray-300 py-8 mt-16 text-center text-sm space-y-2">
-    <p>© 2025 DePunta Software. Todos los derechos reservados.</p>
-    <p>Autoges es una marca registrada de DePunta Software.</p>
-    <p>📞 Teléfono: +598 99 123 456</p>
-    <p>✉️ Email: contacto@autoges.com</p>
-</footer>
+    <!-- Precios -->
+    <section id="precios" class="py-16 px-4 max-w-6xl mx-auto bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg">
+        <h2 class="text-3xl font-bold text-center mb-12">Planes y Precios</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <!-- Plan Gratis -->
+            <div class="bg-white text-blue-800 p-8 rounded-lg shadow-lg text-center">
+                <h3 class="text-xl font-semibold mb-4">Plan Gratis</h3>
+                <p class="mb-6">Ideal para probar el sistema con funciones limitadas.</p>
+                <p class="text-3xl font-bold mb-6">$0 / mes</p>
+                <button class="bg-yellow-400 text-blue-900 px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition">Probar Gratis</button>
+            </div>
+            <!-- Plan Pro -->
+            <div class="bg-blue-700 p-8 rounded-lg shadow-lg text-center">
+                <h3 class="text-xl font-semibold mb-4">Plan Pro</h3>
+                <p class="mb-6">Funciones completas para talleres con alta demanda.</p>
+                <p class="text-3xl font-bold mb-6">$25 / mes</p>
+                <button class="bg-yellow-400 text-blue-900 px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition">Contratar</button>
+            </div>
+            <!-- Plan Premium -->
+            <div class="bg-blue-700 p-8 rounded-lg shadow-lg text-center">
+                <h3 class="text-xl font-semibold mb-4">Plan Premium</h3>
+                <p class="mb-6">Soporte dedicado y personalización avanzada.</p>
+                <p class="text-3xl font-bold mb-6">Consulte</p>
+                <button class="bg-yellow-400 text-blue-900 px-6 py-2 rounded font-semibold hover:bg-yellow-300 transition">Contactar</button>
+            </div>
+        </div>
+    </section>
 
-<!-- Mobile nav toggle -->
-<script>
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
-</script>
+    <!-- Testimonios -->
+    <section id="testimonios" class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Qué dicen nuestros clientes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <blockquote class="bg-gray-100 p-6 rounded shadow hover:shadow-md transition">
+                <p class="italic mb-4">"Autoges nos ayudó a organizar todas las reparaciones y mantener un control total del taller."</p>
+                <footer class="font-semibold">— Taller El Rayo, Montevideo</footer>
+            </blockquote>
+            <blockquote class="bg-gray-100 p-6 rounded shadow hover:shadow-md transition">
+                <p class="italic mb-4">"Con Autoges, el stock de repuestos nunca se nos descontrola y el historial de autos es muy claro."</p>
+                <footer class="font-semibold">— Mecánica López, Maldonado</footer>
+            </blockquote>
+            <blockquote class="bg-gray-100 p-6 rounded shadow hover:shadow-md transition">
+                <p class="italic mb-4">"Sistema fácil de usar y que funciona rápido. Recomendado para cualquier taller."</p>
+                <footer class="font-semibold">— Talleres Pérez, Canelones</footer>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="bg-white py-16 px-4 max-w-4xl mx-auto rounded shadow-md">
+        <h2 class="text-3xl font-bold text-center mb-8">Contacto</h2>
+        <form class="max-w-xl mx-auto space-y-6" onsubmit="event.preventDefault(); alert('Mensaje enviado (simulado)'); this.reset();">
+            <div>
+                <label class="block mb-2 font-semibold" for="nombre">Nombre</label>
+                <input id="nombre" type="text" required
+                       class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+            <div>
+                <label class="block mb-2 font-semibold" for="email">Email</label>
+                <input id="email" type="email" required
+                       class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+            <div>
+                <label class="block mb-2 font-semibold" for="taller">Nombre del Taller</label>
+                <input id="taller" type="text" required
+                       class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+            </div>
+            <div>
+                <label class="block mb-2 font-semibold" for="mensaje">Mensaje</label>
+                <textarea id="mensaje" rows="4" required
+                          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+            </div>
+            <button type="submit"
+                    class="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition w-full">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16 text-center text-sm space-y-2">
+        <p>© 2025 DePunta Software. Todos los derechos reservados.</p>
+        <p>Autoges es una marca registrada de DePunta Software.</p>
+        <p>📞 Teléfono: +598 99 123 456</p>
+        <p>✉️ Email: contacto@autoges.com</p>
+    </footer>
+
+    <!-- Mobile nav toggle -->
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+          menu.classList.toggle('hidden');
+        });
+    </script>
 
 </body>
 </html>
