@@ -29,20 +29,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/index.html", "/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/usuario/yo").authenticated()
-                        .requestMatchers("/", "/index.html", "/static/**", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg").permitAll()
-                        .requestMatchers("/api/ordenes/mis-ordenes").hasAnyRole("ADMIN", "SUPERADMIN", "MECANICO")
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(sess -> sess
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                .csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/", "/index.html", "/favicon.ico", "/css/**", "/js/**", "/images/**", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/usuario/yo").authenticated()
+                .requestMatchers("/api/ordenes/mis-ordenes").hasAnyRole("ADMIN", "SUPERADMIN", "MECANICO")
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
